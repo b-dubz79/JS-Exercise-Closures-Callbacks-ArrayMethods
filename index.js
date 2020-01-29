@@ -141,7 +141,7 @@ function processProduct(num1, num2, callback) {
  * should return "sad".
 */
 function processContains(item,list,callback) {
-  /* CODE HERE */
+  return callback(list.includes(item));
 }
 
 /**
@@ -185,8 +185,12 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
  * @returns an array with all the runners' full names in the following format: "Smith, John".
  * The full names appear in the array in the same order the runners appear in the `runners` array.
 */
-function getFullNames(/* CODE HERE */) {
-  /* CODE HERE */
+function getFullNames(runners) {
+  let fullName = [];
+  runners.forEach(function(runnerList){
+   fullName.push( `${runnerList.last_name}, ${runnerList.first_name}`);
+});
+return fullName;
 }
 
 /**
@@ -221,10 +225,12 @@ function firstNamesAllCaps(runners) {
  * @returns an array containing only the runners that use the given `tShirtSize`.
  * The runners in the array appear in the same order they appear in the `runners` array.
 */
-function getRunnersByTShirtSize(/* CODE HERE */) {
-  /* CODE HERE */
+function getRunnersByTShirtSize(runners, tShirtSize) {
+  let newArr = runners.filter(function(runner){
+  return  runner.shirt_size === tShirtSize;
+  });
+  return newArr
 }
-
 /**
  * ### Challenge `tallyUpDonations`
  * 
@@ -260,10 +266,12 @@ return total;
 */
 function counterMaker() {
   // BROKEN CODE STARTS
-  const count = 0;
-  function counter() {
-    ++count
+  let count = 0;
+
+  return function counter() {
+    return count++
   }
+
   // BROKEN CODE ENDS
 }
 
@@ -288,14 +296,16 @@ function counterMaker() {
  * etc
 */
 function counterMakerWithLimit(max) {
-  let count = 0;
+  let count = -1;
   return function counter(){
-    if(count > max){
+    if(count >= max){
       count = 0;
     }else{
       count++
     }
+    return count;
   }
+  
 }
 
 /////////////// END OF CHALLENGE ///////////////
